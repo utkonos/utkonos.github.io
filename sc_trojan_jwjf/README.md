@@ -306,3 +306,53 @@ Filename: umpdc.dll
 ```
 
 ![Zip Archive Contents](000043000_zip_contents_heirarchy.png)
+
+### Related Files at Low Confidence
+
+Pivoting on the PDB path string that [cyb3rjerry](https://x.com/cyb3rjerry) found in one payload, I stripped it down to just the folder named X on the adversary's desktop: `C:\\Users\\user\\Desktop\\X\\`. There were quite a few files with this in the PDB strings. One is called `RanHax(Farel)Multi-Tool.exe` and the rest have the same filename as the sample collected from the GTA game/mod website: `umpdc.dll`. The figure below shows these files all together.
+
+```text
+EXE: d5a665f83eb6d52950bd79818b002e1a46bd849ac67a1f68499f6f86c25eab75
+Filename: RanHax(Farel)Multi-Tool.exe
+PDB Path: C:\Users\User\Desktop\x\TRAINER\RanHax(Farel) Multi-Tool\RanHax(Farel)Multi-Tool\Release\RanHax(Farel)Multi-Tool.pdb
+```
+
+```text
+DLL: 0a5b89f76f0a811da90fbc2d7f98cf8d055285062eca4e69f6af08f9056213f5
+Filename: umpdc.dll
+PDB Path: C:\Users\User\Desktop\x\TRAINER\INTERNAL C++ FAREL AUTO UPDATE\INTERNAL C++ FAREL AUTO UPDATE\Release\umpdc.pdb
+
+DLL: 0c893e41a710c952619715a99f55dbf12773f681e44a8a569ad7f0f706f853e6
+Filename: umpdc.dll
+PDB Path: C:\Users\User\Desktop\x\TRAINER\INTERNAL C++ FAREL AUTO UPDATE\INTERNAL C++ FAREL AUTO UPDATE\Release\umpdc.pdb
+
+DLL: 28b561d965b3a9af95619537c94d27899a8b777f6eb1f8afd01c348e4a56c5e3
+Filename: umpdc.dll
+PDB Path: C:\Users\User\Desktop\x\TRAINER\INTERNAL C++ FAREL AUTO UPDATE\INTERNAL C++ FAREL AUTO UPDATE\Release\umpdc.pdb
+
+DLL: 40f9d13ef565f54ea5e3e4d01097435de308a781206e08746cac49435ce4dd18
+Filename: umpdc.dll
+PDB Path: C:\Users\User\Desktop\x\TRAINER\INTERNAL C++ FAREL AUTO UPDATE\INTERNAL C++ FAREL AUTO UPDATE\Release\umpdc.pdb
+
+DLL: 70853fc94ba445245cb2a7f52dea42756347e29d04ad8391941760cb39b38c95
+Filename: umpdc.dll
+PDB Path: C:\Users\User\Desktop\x\TRAINER\INTERNAL C++ FAREL AUTO UPDATE\INTERNAL C++ FAREL AUTO UPDATE\Release\umpdc.pdb
+
+DLL: 93638e3b79c8d5bb278af76f1d48918332f56e14565851ad160f3bc8d443bb9c
+Filename: umpdc.dll
+PDB Path: C:\Users\User\Desktop\x\TRAINER\INTERNAL C++ FAREL AUTO UPDATE\INTERNAL C++ FAREL AUTO UPDATE\Release\umpdc.pdb
+
+DLL: b518f295977bf944ad57ee220eac6a6e35a02e05af760962a8d1b9a6eaf3a2ec
+Filename: umpdc.dll
+PDB Path: C:\Users\User\Desktop\x\TRAINER\INTERNAL C++ FAREL AUTO UPDATE\INTERNAL C++ FAREL AUTO UPDATE\Release\umpdc.pdb
+
+DLL: bbf2261adf8e2bdbed9d8899f416f31ae1fe9f190f695220f36f4c24ff3d2f86
+Filename: umpdc.dll
+PDB Path: C:\Users\User\Desktop\x\TRAINER\INTERNAL C++ FAREL AUTO UPDATE\INTERNAL C++ FAREL AUTO UPDATE\Release\umpdc.pdb
+
+DLL: ea8dff6054830d0cf7423c132f94bd74445f49037a20170b3f1e240ecb6a6ecc
+Filename: umpdc.dll
+PDB Path: C:\Users\User\Desktop\x\INTERNAL C++ FAREL AUTO UPDATE\Release\umpdc.pdb
+```
+
+![Potentially Related by PDB Substring](000044000_potentially_related_by_pdb.png)
