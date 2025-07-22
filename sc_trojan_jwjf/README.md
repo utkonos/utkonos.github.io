@@ -294,7 +294,7 @@ The blanks can be filled in using the debugger method from earlier. In the next 
 
 ### Odds and Ends
 
-The following is a ZIP archive collected from a GTA gamer website on 2025-07-03. This is supposed to be a game mod called "Visual Car Spawner". The filename of the `scavenger` DLL inside the archive is `umpdc.dll`. This is presumably masquerading as some game cheat/mod DLL. The following figure shows the file heirarchy iside of the archive.
+The following is a ZIP archive collected from a GTA gamer website on 2025-07-03. This is supposed to be a game mod called "Visual Car Spawner". The filename of the `scavenger` DLL inside the archive is `umpdc.dll`. This is presumably masquerading as some game cheat/mod DLL. The following figure shows the file heirarchy inside of the archive.
 
 ```text
 ZIP: e131d7ac201384552c90a8a45aea68d7fa9825fecfe0fb0b98668cf1c6e331ac
