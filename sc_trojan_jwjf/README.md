@@ -287,3 +287,22 @@ emit binjadump*.dat [ | vstack -a x64 -S 0x25000 [ | scope 2 | terminate | termi
 ```
 
 ![Binary Refinery Emulation Kludge](000041000_binref_emu_kludge.png)
+
+The blanks can be filled in using the debugger method from earlier. In the next figure is the first of the next stage payload hosting strings. [cyb3rjerry](https://x.com/cyb3rjerry) grabbed all the next stage hosting and c2 hostnames from all the files I was able to find. Please go fetch the complete set of network IOCs from that blog linked up at the top here.
+
+![Next Stage Payload Hosting URL String](000042000_next_stage_url_firebase_su.png)
+
+### Odds and Ends
+
+The following is a ZIP archive collected from a GTA gamer website on 2025-07-03. This is supposed to be a game mod called "Visual Car Spawner". The filename of the `scavenger` DLL inside the archive is `umpdc.dll`. This is presumably masquerading as some game cheat/mod DLL. The following figure shows the file heirarchy iside of the archive.
+
+```text
+ZIP: e131d7ac201384552c90a8a45aea68d7fa9825fecfe0fb0b98668cf1c6e331ac
+Filename: 1743451692_Visual%20Car%20Spawner%20v3.4.zip
+URL: hxxps[://]fileservice[.]gtainside[.]com/fileservice/downloads/ftpk/1743451692_Visual%20Car%20Spawner%20v3.4.zip
+
+DLL: 90291a2c53970e3d89bacce7b79d5fa540511ae920dd4447fc6182224bbe05c5
+Filename: umpdc.dll
+```
+
+![Zip Archive Contents](000043000_zip_contents_heirarchy.png)
