@@ -371,7 +371,7 @@ npnjs[.]com
 prod01-npmjs[.]com
 ```
 
-The following domains are related by the Cloudflare DNS server pair `carlane.ns.cloudflare.com` & `ruben.ns.cloudflare.com` as well as being registered with NameSilo. These are all various phishing domains with a postal service nexus.
+The following domains are related by the Cloudflare DNS server pair `carlane.ns.cloudflare[.]com` & `ruben.ns.cloudflare[.]com` as well as being registered with NameSilo. These are all various phishing domains with a postal service nexus.
 
 ```text
 anpost-ie[.]top
