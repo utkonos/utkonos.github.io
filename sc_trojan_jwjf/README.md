@@ -147,7 +147,7 @@ You can see the locations of the other debugger traps if you select the null dat
 
 #### IsDebuggerPresent
 
-One of the early traps can be hit if the debugger has not been hidden. The API hash for `IsDebuggerPresent` is `0xc3da4ec4` and is shown in the next figure. To avoid this one, just use the `hide` command in [x64dbg](https://github.com/x64dbg/x64dbg) if you're using that particular debugger. The DLL name hash used along with this function name hash is `0x1819ae87` and represents `kernel32.dll`.
+One of the early traps can be hit if the debugger has not been hidden. The API hash for `IsDebuggerPresent` is `0xc3da4ec4` and is shown in the next figure. The DLL name hash used along with this function name hash is `0x1819ae87` and represents `kernel32.dll`.
 
 ![IsDebuggerPresent](000018000_isdebuggerpresent.png)
 
@@ -159,7 +159,7 @@ The malware hides its configuration in a series of quad word stack strings. The 
 
 ### BeingDebugged Flag
 
-The next anti-debugging check is shown in the next figure. The address of the PEB is again read from `gs:[0x60]` at the top highlighted in yellow. Then the `BeingDebugged` boolean flag from the PEB structure is checked. If the flag is present, control flow takes you to an instance of the null pointer trap described above.
+The next anti-debugging check is shown in the next figure. The address of the PEB is again read from `gs:[0x60]` at the top highlighted in yellow. Then the `BeingDebugged` boolean flag from the PEB structure is checked. If the flag is present, control flow takes you to an instance of the null pointer trap described above. To avoid this one, just use the `hide` command in [x64dbg](https://github.com/x64dbg/x64dbg) if you're using that particular debugger.
 
 ![BeingDebugged Flag Check](000020000_being_debugged_flag.png)
 
@@ -219,11 +219,11 @@ However, because this function is dynamically generated, the above patching woul
 
 #### Detection Opportunity: Indirect Syscall Immediate Obfuscation
 
-The technique of hiding a syscall function as bytes hard-coded in immediate values presents a nice opportunity for detection. This technique is reminicent of stack strings where the characters of the string are obfuscated in immediate values before being written to the stack. However, in this case, the immediate values are written to allocated memory and become a function. The following figure shows a YARA rule that targets this technique. The actual rule rather than a PNG is provided in the gist linked to earlier.
+The technique of hiding a syscall function as bytes hard-coded in immediate values presents a nice opportunity for detection. This technique is reminiscent of stack strings where the characters of the string are obfuscated in immediate values before being written to the stack. However, in this case, the immediate values are written to allocated memory and become a function. The following figure shows a YARA rule that targets this technique. The actual rule rather than a PNG is provided in the gist linked to earlier.
 
 ![YARA Rule for Hunting Syscall Immediate Obfuscation](000032000_syscall_immediate_obf_yara.png)
 
-The hunting results have not been fully triaged yet. This is on the todo list. However, a spot check shows that the rule is matching malware files that are outside of the malware family we're analyzing here. The next figure shows the match location as seen in Binary Ninja with the syscall immediates highlighted.
+The hunting results have not been fully triaged yet. This is on the todo list. However, a spot check shows that the rule is matching malware files that are outside of the malware family we're analyzing here. The next figure shows the match location as seen in Binary Ninja with the syscall bytes located in immediate values.
 
 ![Other Malware Sample Using Syscall Immediate Obfuscation](000033000_other_malware_syscall_immediate_obf.png)
 
@@ -271,3 +271,9 @@ These strings can be seen in the next figure as shown in the debugger.
 The last dll name in the list above is stored in an obfuscated string like the rest. However, the last two instructions as shown in this next figure lead to Advanced Vector Extensions (AVX) instructions. These can raise an illegal instruction exception if the sandbox or VM being used is not configured to allow them. The instructions are highligted at the bottom in red and use registers such as `ymm0`.
 
 ![AVX Instructions](000039000_avx_instructions.png)
+
+### Decoding Configuration Strings
+
+After slogging through all the anti-analysis trickery, I noticed that basically each capability and each encoded string is totally context independent. The malware is not keeping score in any way to force you to jump through all the hoops. Therefore, one way to decode the strings is just to go straight to them and execute in the debugger from the start of the encoded string to the location where it stores the decoded string on the stack for later use. In the next figure we're at the first jump at the start of the big function where everything happens. The first set of encoded strings is at address `0x18000c20d` and encodes the `\SCVNGR_VM` string. Therefore, we modify the instruction pointer to move directly to the start of the encoded string. Finally, we execute until the location where the string is stored for later use.
+
+![Go Straight to Decoding First String](000040000_goto_decode.gif)
