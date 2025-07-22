@@ -277,3 +277,13 @@ The last dll name in the list above is stored in an obfuscated string like the r
 After slogging through all the anti-analysis trickery, I noticed that basically each capability and each encoded string is totally context independent. The malware is not keeping score in any way to force you to jump through all the hoops. Therefore, one way to decode the strings is just to go straight to them and execute in the debugger from the start of the encoded string to the location where it stores the decoded string on the stack for later use. In the next figure we're at the first jump at the start of the big function where everything happens. The first set of encoded strings is at address `0x18000c20d` and encodes the `\SCVNGR_VM` string. Therefore, we modify the instruction pointer to move directly to the start of the encoded string. Finally, we execute until the location where the string is stored for later use.
 
 ![Go Straight to Decoding First String](000040000_goto_decode.gif)
+
+### Decoding Configuration Strings - Another Method
+
+I started watching a [YouTube video](https://youtu.be/djMa4P1lgS8) by [JershMagersh](https://x.com/JershMagersh) about making a Binary Ninja emulation plugin. I got a few minutes into the video when he describes the core concept: using the [vstack unit](https://binref.github.io/#refinery.vstack) in [Binary Refinery](https://github.com/binref/refinery). I will have to go back and watch the rest of the video some time, but that provided the inspiration for the following inelegant kludge that doesn't work in all cases. I made a Binary Ninja plugin called [BinjaDump](https://gist.github.com/utkonos/86355937a168b1caa5b06d78e5b7498b) a bit ago that lets me dump bytes from different locations and functions in different ways to stuff like [HexFiend](https://github.com/HexFiend/HexFiend), [010editor](https://www.sweetscape.com/010editor/), [DogBolt](https://dogbolt.org/), and [Spectra Analyze](https://www.reversinglabs.com/products/spectra-analyze). Why not test the concept of using Binary Refinery on these encoded strings? After all the bits of code were dumped to little files, I used the following Binary Refinery command line incantation. I would call the results not awesome, and not terrible.
+
+```zsh
+emit binjadump*.dat [ | vstack -a x64 -S 0x25000 [ | scope 2 | terminate | terminate H:86 | peek -Qr ]]
+```
+
+![Binary Refinery Emulation Kludge](000041000_binref_emu_kludge.png)
