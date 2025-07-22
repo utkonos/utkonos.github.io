@@ -356,3 +356,39 @@ PDB Path: C:\Users\User\Desktop\x\INTERNAL C++ FAREL AUTO UPDATE\Release\umpdc.p
 ```
 
 ![Potentially Related by PDB Substring](000044000_potentially_related_by_pdb.png)
+
+### Infrastructure Analysis: Domains
+
+Pivoting on the known next stage and command and control domain indicators, the following additional indicators were found. First is an `@yandex[.]ru` email address found in the WHOIS data for `datalytica[.]su`. Next, are three domains that are related in multiple ways: `npnjs[.]com`, `prod01-npmjs[.]com`, and `dieorsuffer[.]com`. Additionally, `npnjs[.]com` is [known](https://github.com/prettier/eslint-config-prettier/issues/339#issuecomment-3090304490) to have been used in the NPM phishing attack. This indicates that `prod01-npmjs[.]com` may also be related to the phishing attack. They are related by:
+
+1. Sharing the same Cloudflare DNS pair indicating they may be under the same user account: `CASH.NS.CLOUDFLARE[.]COM` & `NELCI.NS.CLOUDFLARE[.]COM`
+2. Registered with NameSilo
+3. Contain the string `npm`
+
+```text
+dieorsuffer[.]com
+npnjs[.]com
+prod01-npmjs[.]com
+```
+
+The following domains are related by the Cloudflare DNS server pair `carlane.ns.cloudflare.com` & `ruben.ns.cloudflare.com` as well as being registered with NameSilo. These are all various phishing domains with a postal service nexus.
+
+```text
+anpost-ie[.]top
+biz-itapost[.]top
+ie-anpost[.]top
+italiane-poste[.]top
+mypost-gob[.]top
+poste-italiane[.]top
+uspsmypost[.]top
+```
+
+### Infrastructure Analysis: IP Address
+
+Most of the IP addresses used in this campaign are behind Cloudflare except for one: `45.9.149[.]210`. This IP is related to the following hostnames via passive DNS resolutions that are contemporaneous with the campaign.
+
+```text
+firebase[.]su
+dieorsuffer[.]com
+tmpl.rdntocdns[.]com
+```
