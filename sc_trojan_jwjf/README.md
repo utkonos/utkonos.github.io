@@ -1,5 +1,7 @@
 # Supply Chain Trojan `sc_trojan_jwjf`
 
+_IOCs:_ [Gist](https://gist.github.com/utkonos/7e3a337b7f56449c634e8e046ab7d64e)
+
 On July 18th, Socket published [research](https://socket.dev/blog/npm-phishing-campaign-leads-to-prettier-tooling-packages-compromise) on a phishing campaign which led to a compromise of a set of NPM packages which were related to the [Prettier](https://www.npmjs.com/package/prettier) code formatting tool. The DLL trojan found in this attack as well other samples as investigated below is designated as `sc_trojan_jwjf`.
 
 *Update:* Twitter user [cyb3rjerry](https://x.com/cyb3rjerry) located the name of the malware, `scavenger`, according to parts of the PDB path found in this sample:
@@ -80,7 +82,7 @@ The API hash is shown in the red highlight at the top of the figure above. And t
 
 #### Detection Opportunity: Ntdll API Hash
 
-The API hash used to locate `ntdll.dll` provides a nice detection opportunity. The following is a YARA rule that incorporates the instructions that use the API hash. This rule matches a number of other DLLs from this same malware family outside of the ones from the Prettier and got-fetch NPM package. This is just an image of the first draft YARA rule. You can access the current version with any revisions in the [gist](https://gist.github.com/utkonos/7e3a337b7f56449c634e8e046ab7d64e) that goes with this research. You will also find updates lists of IOCs like file hashes and more.
+The API hash used to locate `ntdll.dll` provides a nice detection opportunity. The following is a YARA rule that incorporates the instructions that use the API hash. This rule matches a number of other DLLs from this same malware family outside of the ones from the Prettier and got-fetch NPM package. This is just an image of the first draft YARA rule. You can access the current version with any revisions in the Gist that goes with this research. You will also find updates lists of IOCs like file hashes and more.
 
 ![YARA Rule for Ntdll API Hash](000013000_ntdll_hash_yara.png)
 
