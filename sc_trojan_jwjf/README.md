@@ -80,7 +80,7 @@ The API hash is shown in the red highlight at the top of the figure above. And t
 
 #### Detection Opportunity: Ntdll API Hash
 
-The API hash used to locate `ntdll.dll` provides a nice detection opportunity. The following is a YARA rule that incorporates the instructions that use the API hash. This rule matches a number of other DLLs from this same malware family outside of the ones from the Prettier and got-fetch NPM package. This is just an image of the first draft YARA rule. You can access the current version with any revisions in the [gist](https://gist.github.com/utkonos/56b26540d67c0e9a2b4e50021317e794) that goes with this research. You will also find updates lists of IOCs like file hashes and more.
+The API hash used to locate `ntdll.dll` provides a nice detection opportunity. The following is a YARA rule that incorporates the instructions that use the API hash. This rule matches a number of other DLLs from this same malware family outside of the ones from the Prettier and got-fetch NPM package. This is just an image of the first draft YARA rule. You can access the current version with any revisions in the [gist](https://gist.github.com/utkonos/7e3a337b7f56449c634e8e046ab7d64e) that goes with this research. You will also find updates lists of IOCs like file hashes and more.
 
 ![YARA Rule for Ntdll API Hash](000013000_ntdll_hash_yara.png)
 
